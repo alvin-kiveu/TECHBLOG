@@ -1,16 +1,20 @@
-# Steps-to-Set-Up-PHP-Apache-MySQL-and-phpMyAdmin-on-Ubuntu
+# Steps to Set Up PHP, Apache, MySQL, and phpMyAdmin on Ubuntu
+
+Setting up a LAMP stack (Linux, Apache, MySQL, PHP) on Ubuntu is a common task for developers. This guide will walk you through the steps to install and configure Apache, MySQL, PHP, and phpMyAdmin on an Ubuntu system.
 
 
-## Steps 1  Install Apache
+## Step 1: Install Apache
 
-
-Update and upgrade your system
+### Update and Upgrade Your System
+First, ensure your system is up to date:
 
 ```bash
 sudo apt update && sudo apt upgrade
 ```
 
-Install Apache
+### Install Apache
+
+Next, install Apache:
 
 ```bash
 sudo apt install apache2
@@ -18,13 +22,14 @@ sudo apt install apache2
 
 ### Setup Firewall
 
-Once the apache installation has been finished, we need to set up Uncomplicated Firewall (UFW) with Apache to allow public access on default web ports for HTTP and HTTPS
+Set up the Uncomplicated Firewall (UFW) to allow public access on default web ports for HTTP and HTTPS:
 
 ```bash
 sudo ufw allow 'Apache'
 ```
 
 Enbale Apache Full
+
 
 ```bash
 sudo ufw allow 'Apache Full'
@@ -100,13 +105,14 @@ Secure MySQL Installation
 sudo mysql_secure_installation
 ```
 
-Follow the instructions to secure the installation
+Follow the prompts to secure your installation.
+
 Yes -> 0 -> Yes -> Yes -> Yes
 
 Set the marchine password for MySQL and ignore 
 
 
-Create a new user and grant privileges
+### Create a new user and grant privileges
 
 Access Mysql
 
@@ -235,6 +241,27 @@ Access Php
   ```bash
   http://sever-ip/phpmyadmin
   ```
+
+
+
+
+
+# ADDITIONAL SERVER CONFIGURATION 
+
+### How to add cron job in Ubuntu
+
+```bash
+crontab -e
+```
+
+Add the following line to run the script every 5 minutes
+
+```bash
+*/5 * * * * /usr/bin/php /var/www/html/cron.php
+```
+
+Save and exit
+
 
 Happy Coding! :smile:
 

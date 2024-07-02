@@ -10,7 +10,9 @@ Tech Blog is where i will be posting tech tutorials and articles on various topi
 - [Database Replication](#Database-Replication.md)
 
 
+###  Support the Blog
 
+If you find the tutorials and articles helpful, consider supporting the blog with a donation. Your contributions help maintain the site and keep the content flowing.
 
 
 

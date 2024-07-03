@@ -5,9 +5,11 @@ Tech Blog is where i will be posting tech tutorials and articles on various topi
 
 ### Table of Topics
 
-- [Steps to Set Up PHP, Apache, MySQL, and phpMyAdmin on Ubuntu](#Steps-to-Set-Up-PHP-Apache-MySQL-and-phpMyAdmin-on-Ubuntu.md)
+- [Steps to Set Up PHP, Apache, MySQL, and phpMyAdmin on Ubuntu](https://github.com/alvin-kiveu/TECHBLOG/blob/main/Steps-to-Set-Up-PHP-Apache-MySQL-and-phpMyAdmin-on-Ubuntu.md)
 
-- [Database Replication](#Database-Replication.md)
+- [Database Replication](https://github.com/alvin-kiveu/TECHBLOG/blob/main/Database-Replication.md)
+
+- [Mikrotik PPPoE Configuration](https://github.com/alvin-kiveu/TECHBLOG/blob/main/Miktotik-PPPoE-Config.md)
 
 
 ###  Support the Blog

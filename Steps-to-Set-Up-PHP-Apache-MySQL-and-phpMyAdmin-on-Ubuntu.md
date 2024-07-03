@@ -121,14 +121,16 @@ sudo mysql
 ```
 Creat User 
 
+Replace dbusername with your desired username and dbpassword with your desired password
+
 ```bash
-CREATE USER 'dbusername'@'localhost' IDENTIFIED BY 'dbpassword';
+CREATE USER 'nivortec'@'localhost' IDENTIFIED BY 'nivortec@46';
 ```
 
 Grant privileges
 
 ```bash
-GRANT ALL PRIVILEGES ON *.* TO 'dbusername'@'localhost';
+GRANT ALL PRIVILEGES ON *.* TO 'nivortec'@'localhost';
 ```
 
 Flush privileges
@@ -220,11 +222,7 @@ sudo systemctl restart apache2
 
 Cofigure PHPMYADMIN with Apache
 
-```bash
-sudo ln -s /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf
-```
-
-Then, enable the configuration:
+Enable the configuration:
 
 ```bash
 sudo a2enconf phpmyadmin

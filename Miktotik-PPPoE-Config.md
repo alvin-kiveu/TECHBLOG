@@ -19,7 +19,7 @@ a. Create a new Pool for the PPPoE server:
 b. Create a new PPPoE server profile:
 
 ```bash
-/ppp profile add name=UMS-PPPoE-Profile local-address=Ums-PPPoE-Pool remote-address=UMS-PPPoE-Pool
+/ppp profile add name=UMS-PPPoE-Profile local-address=172.14.0.1 remote-address=UMS-PPPoE-Pool
 ```
 
 c. Create a new PPPoE server interface:

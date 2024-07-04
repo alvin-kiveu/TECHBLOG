@@ -291,9 +291,6 @@ sudo git clone https://<ACCESSTOKEN>@github.com/username/ProjectName.git
 Or you can use WinSCP to upload files to the server
 
 
-
-
-
 Happy Coding! :smile:
 
 

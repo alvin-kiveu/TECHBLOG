@@ -98,6 +98,8 @@ In this tutorial, you learned how to configure a Mikrotik router to work as a PP
 If you find the tutorials and articles helpful, consider supporting the blog with a donation. Your contributions help maintain the site and keep the content flowing.
 
 
+
+
 Happy Networking! :smiley:
 
 

@@ -124,13 +124,13 @@ Creat User
 Replace dbusername with your desired username and dbpassword with your desired password
 
 ```bash
-CREATE USER 'nivortec'@'localhost' IDENTIFIED BY 'nivortec@46';
+CREATE USER 'dbusername'@'localhost' IDENTIFIED BY 'dbpassword';
 ```
 
 Grant privileges
 
 ```bash
-GRANT ALL PRIVILEGES ON *.* TO 'nivortec'@'localhost';
+GRANT ALL PRIVILEGES ON *.* TO 'dbusername'@'localhost';
 ```
 
 Flush privileges

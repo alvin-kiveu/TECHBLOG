@@ -11,6 +11,8 @@ Tech Blog is where i will be posting tech tutorials and articles on various topi
 
 - [Mikrotik PPPoE Configuration](https://github.com/alvin-kiveu/TECHBLOG/blob/main/Miktotik-PPPoE-Config.md)
 
+- [Mikrotik Static Configuration](https:://github.com/alvin-kiveu/TECHBLOG/blob/main/Mikrotik-Static-Config.md)
+
 
 ###  Support the Blog
 

@@ -260,6 +260,39 @@ Add the following line to run the script every 5 minutes
 
 Save and exit
 
+### How to add a instll composer in Ubuntu 
+
+```bash
+sudo apt install composer
+```
+
+Chcek Composer version
+
+```bash
+composer --version
+```
+
+### How to link an push file with git
+
+File are stored in /var/www/html
+
+```bash
+cd /var/www/html/ProgectName
+```
+
+Generate token from github vist : https://github.com/settings/tokens
+
+Clone with github token 
+
+```bash
+sudo git clone https://<ACCESSTOKEN>@github.com/username/ProjectName.git
+```
+
+Or you can use WinSCP to upload files to the server
+
+
+
+
 
 Happy Coding! :smile:
 

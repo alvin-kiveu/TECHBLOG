@@ -2,6 +2,8 @@
 
 This tutorial will guide you on how to configure a Mikrotik router to work as a PPPoE server. PPPoE (Point-to-Point Protocol over Ethernet) is a network protocol used to establish a direct connection between two nodes on an Ethernet network. It is commonly used by ISPs to manage customer connections.
 
+You can watch the video tutorial on [YouTube](https://youtu.be/VCpSEDARLg4?si=cMwheN0cWYIU3Oap).
+
 
 ### Step 1: Configure the Mikrotik Router
 
@@ -9,24 +11,33 @@ This tutorial will guide you on how to configure a Mikrotik router to work as a 
 
 2. Go to the Open New Terminal window and enter the following commands to configure the PPPoE server:
 
-a. Create a new Pool for the PPPoE server:
+a Create a Bridge Interface for the PPPoE server IF you don't have one IF you have one you can skip this step:
+
+```bash
+/interface bridge add name=UMS_Bridge_PPPoE
+```
+
+b. Create a new Pool for the PPPoE server:
 
 
 ```bash
 /ip pool add name=UMS-PPPoE-Pool ranges=172.14.0.2-172.14.3.254
 ```
 
-b. Create a new PPPoE server profile:
+c. Create a new PPPoE server profile:
 
 ```bash
 /ppp profile add name=UMS-PPPoE-Profile local-address=172.14.0.1 remote-address=UMS-PPPoE-Pool
 ```
 
-c. Create a new PPPoE server interface:
+d. Create a new PPPoE server interface:
 
 ```bash
 /interface pppoe-server server add service-name=UMS-PPPoE-Service default-profile=UMS-PPPoE-Profile disabled=no
 ```
+
+A prompt will appear asking you to type the name of the interface. Type The name of The PPPoE Bridge Interface, for example, `UMS_Bridge_PPPoE` and press Enter. Make sure the is the same as the name of the bridge interface you created.
+
 
 
 If you using Radius server for authentication, you can add the following commands:
@@ -43,7 +54,7 @@ Replace `radius-server-ip` with the IP address of your Radius server and `radius
 Allow the PPPoE server to use the Radius server for authentication:
 
 ```bash
-/ppp profile set UMS-PPPoE-Profile use-radius=yes
+/ppp aaa set use-radius=yes
 ```
 
 if you want to use the Your Mikrotik router for authentication, you can just Proceed to the next step of adding PPPoE user, but for the Radius server you can add on your Radius server.

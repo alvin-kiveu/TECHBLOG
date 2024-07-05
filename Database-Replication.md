@@ -13,6 +13,9 @@ Install MySQL/MariaDB on both servers if not already installed.
 
 ```bash
 sudo apt-get update
+```
+
+```bash
 sudo apt-get install mysql-server
 ```
 
@@ -21,10 +24,14 @@ sudo apt-get install mysql-server
 Edit the MySQL configuration file (/etc/mysql/mysql.conf.d/mysqld.cnf).
 
 ```bash
+sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+```
+
+```bash
 [mysqld]
 server-id=1
 log_bin=binlog
-binlog_do_db=radius_db
+binlog_do_db=server_one_db
 ```
 
 Create a replication user.
@@ -70,7 +77,6 @@ CHANGE MASTER TO MASTER_HOST='192.168.1.1', MASTER_USER='repl', MASTER_PASSWORD=
 START SLAVE;
 ```
 
-Configure Server 1 to replicate from Server 2:
 
 Get the binary log file position from Server 2.
 
@@ -267,9 +273,3 @@ Support the blog by sharing this tutorial with others. You can also support the 
 
 
 Happy coding! :smiley:
-
-
-
-
-
-

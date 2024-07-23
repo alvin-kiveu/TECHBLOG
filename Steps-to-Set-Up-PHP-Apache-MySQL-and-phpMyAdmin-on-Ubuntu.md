@@ -328,6 +328,15 @@ sudo a2ensite mikrolink.conf
 sudo systemctl reload apache2
 ```
 
+### To fix Url not found
+
+```bash
+sudo apt update
+sudo apt install libapache2-mod-rewrite
+sudo a2enmod rewrite
+sudo service apache2 restart
+```
+
 Happy Coding! :smile:
 
 

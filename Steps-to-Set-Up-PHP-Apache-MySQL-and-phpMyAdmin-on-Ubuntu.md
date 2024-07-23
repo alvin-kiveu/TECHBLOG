@@ -295,6 +295,38 @@ sudo git clone https://<ACCESSTOKEN>@github.com/username/ProjectName.git
 
 Or you can use WinSCP to upload files to the server
 
+### How to Point a domain
+
+User ClodeFare to point to the server ip ten add this 
+
+```bash
+sudo nano /etc/apache2/sites-available/mikrolink.conf
+```
+
+```bash
+<VirtualHost *:80>
+    ServerAdmin webmaster@mikrol.ink
+    ServerName mikrol.ink
+    DocumentRoot /var/www/html/MiroTikLink/public
+
+    <Directory /var/www/html/MiroTikLink>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+
+```bash
+sudo a2ensite mikrolink.conf
+```
+
+```bash
+sudo systemctl reload apache2
+```
 
 Happy Coding! :smile:
 

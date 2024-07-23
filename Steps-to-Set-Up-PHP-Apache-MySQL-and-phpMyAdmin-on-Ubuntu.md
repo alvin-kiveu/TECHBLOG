@@ -176,7 +176,12 @@ sudo systemctl restart mysql
 Install PHP
 
 ```bash
-sudo apt install php-fpm php libapache2-mod-php php-common php-mysql php-xml php-xmlrpc php-curl php-gd php-imagick php-cli php-imap php-mbstring php-opcache php-soap php-zip php-intl php-bcmath unzip -y
+sudo add-apt-repository ppa:ondrej/php
+sudo apt update
+```
+
+```bash
+sudo apt install php8.2-fpm php8.2 libapache2-mod-php8.2 php8.2-common php8.2-mysql php8.2-xml php8.2-xmlrpc php8.2-curl php8.2-gd php8.2-imagick php8.2-cli php8.2-imap php8.2-mbstring php8.2-opcache php8.2-soap php8.2-zip php8.2-intl php8.2-bcmath unzip -y
 ```
 
 Check the version of PHP
@@ -188,7 +193,7 @@ php -v
 Configure PHP
 
 ```bash
-sudo nano /etc/php/8.1/apache2/php.ini
+sudo nano /etc/php/8.2/apache2/php.ini
 ```
 
 Change the following lines

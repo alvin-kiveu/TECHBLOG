@@ -176,8 +176,11 @@ sudo systemctl restart mysql
 Install PHP
 
 ```bash
+sudo apt install software-properties-common -y
+```
+
+```bash
 sudo add-apt-repository ppa:ondrej/php
-sudo apt update
 ```
 
 ```bash

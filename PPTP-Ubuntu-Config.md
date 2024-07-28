@@ -204,6 +204,13 @@ echo "username pptpd password ipaddress" >> /etc/ppp/chap-secrets
 
 REPLACE username, password and ipaddress with your own values.
 
+Then restart the pptpd service
+
+```bash
+service pptpd restart
+```
+
+
 ### HOW TO READ THE USER PPTP ACCOUT WITH PHP
   
 ```php

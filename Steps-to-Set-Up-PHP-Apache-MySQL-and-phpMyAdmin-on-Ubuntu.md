@@ -176,7 +176,15 @@ sudo systemctl restart mysql
 Install PHP
 
 ```bash
-sudo apt install php-fpm php libapache2-mod-php php-common php-mysql php-xml php-xmlrpc php-curl php-gd php-imagick php-cli php-imap php-mbstring php-opcache php-soap php-zip php-intl php-bcmath unzip -y
+sudo apt install software-properties-common -y
+```
+
+```bash
+sudo add-apt-repository ppa:ondrej/php
+```
+
+```bash
+sudo apt install php8.2-fpm php8.2 libapache2-mod-php8.2 php8.2-common php8.2-mysql php8.2-xml php8.2-xmlrpc php8.2-curl php8.2-gd php8.2-imagick php8.2-cli php8.2-imap php8.2-mbstring php8.2-opcache php8.2-soap php8.2-zip php8.2-intl php8.2-bcmath unzip -y
 ```
 
 Check the version of PHP
@@ -188,7 +196,7 @@ php -v
 Configure PHP
 
 ```bash
-sudo nano /etc/php/8.1/apache2/php.ini
+sudo nano /etc/php/8.2/apache2/php.ini
 ```
 
 Change the following lines
@@ -290,6 +298,47 @@ sudo git clone https://<ACCESSTOKEN>@github.com/username/ProjectName.git
 
 Or you can use WinSCP to upload files to the server
 
+### How to Point a domain
+
+User ClodeFare to point to the server ip ten add this 
+
+```bash
+sudo nano /etc/apache2/sites-available/mikrolink.conf
+```
+
+```bash
+<VirtualHost *:80>
+    ServerAdmin webmaster@mikrol.ink
+    ServerName mikrol.ink
+    DocumentRoot /var/www/html/MiroTikLink/public
+
+    <Directory /var/www/html/MiroTikLink>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+
+```bash
+sudo a2ensite mikrolink.conf
+```
+
+```bash
+sudo systemctl reload apache2
+```
+
+### To fix Url not found
+
+```bash
+sudo apt update
+sudo apt install libapache2-mod-rewrite
+sudo a2enmod rewrite
+sudo service apache2 restart
+```
 
 Happy Coding! :smile:
 

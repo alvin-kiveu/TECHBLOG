@@ -54,31 +54,21 @@ a. Create a Bridge Interface for Static IF you don't have one IF you have one yo
 
 You can assign the bridge to the ports you want to use for the static router.
 
-### Step 2: Configure the Static Routes
+### Step 2: Add One Computer to the Network
 
-Go to the IP menu and select the Routes option.
+Connect a computer to the Mikrotik router using an Ethernet cable.
 
-Add a new route by clicking on the + sign.
+Configure the computer's network settings to use the following IP address:
 
-Enter the destination IP address, gateway IP address, and the interface you want to use for the static route.
 
-Click on the Apply button to save the changes.
-
-### Step 3: Test the Static Router
-
-To test the static router, connect two computers to the Mikrotik router.
-
-Set the IP address of the first computer to the IP address of the Mikrotik router.
-
-Set the IP address of the second computer to the IP address of the destination network.
-
-Ping the destination IP address from the first computer to test the static router.
-
-If the static router is configured correctly, you should be able to ping the destination IP address successfully.
-
-That's it! You have successfully configured a Mikrotik router to work as a static router. You can now use the static router to forward data packets between computer networks.
-
+```bash
+IP Address: 41.18.1.2
+Subnet Mask: 255.255.255.0
+Gateway: 41.18.1.1
+DNS Server: You can use a public DNS server like 8.8.8.8 (Google DNS) or any DNS server of your choice.
 ```
+
+
 
 
 

@@ -20,7 +20,7 @@ a. Create a Bridge Interface for Static IF you don't have one IF you have one yo
 # Add a Static IP Address to the Bridge Interface:
 
 ```bash
-/ip address add address=192.168.1.1/24 interface=UMS_Bridge_Static
+/ip address add address=41.18.1.1/24 interface=UMS_Bridge_Static
 ```
 
 
@@ -35,14 +35,14 @@ a. Create a Bridge Interface for Static IF you don't have one IF you have one yo
 # Create simple queue for 10 Mbps user
 
 ```bash
-/queue simple add name=10mbps_user target=192.168.1.10/32 max-limit=10M/10M
+/queue simple add name=10mbps_user target=41.18.1.10/32 max-limit=10M/10M
 ```
 
 
 # Create simple queue for 4 Mbps user
 
 ```bash
-/queue simple add name=4mbps_user target=192.168.1.11/32 max-limit=4M/4M
+/queue simple add name=4mbps_user target=41.18.1.11/32 max-limit=4M/4M
 ```
 
 

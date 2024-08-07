@@ -134,25 +134,6 @@ sudo systemctl enable xl2tpd
 sudo systemctl enable ipsec
 ```
 
-
-9. To connect to the VPN server to Mikrotik devices, you must create a new L2TP client in the Mikrotik device
-
-```bash
-/interface l2tp-client
-add connect-to=18.170.185.89
-set user=vpnuser1
-set password=KXqjY8BWetDYEbCZ
-set add-default-route=yes
-set allow=pap,chap,mschap1,mschap2
-set max-mru=1280
-set max-mtu=1450
-set mrru=disab
-set name=l2tp-out1
-set use-ipsec=yes
-set ipsec-secret=bDuW9nqPJoPPjXL9jzhH
-```
-
-
 HOW TO READ THE USER PPTP ACCOUT WITH PHP
 
 ```php

@@ -1,13 +1,9 @@
-# CONFIGURING L2TP VPN IN UBUNTU 
+## Features
 
-L2TP VPN is a protocol that is used to establish a connection between a client and a server. It is used to create a secure connection to a remote network. In this tutorial, we will learn how to configure an L2TP VPN in Ubuntu.
+- Access and manage Mikrotik devices using a web browser or Winbox
 
 
-## Prerequisites
-
-- A server running Ubuntu.
-
-## Step 1: Install L2TP Server
+## Installation for L2TP VPN
 
 1. Update the package list.
 
@@ -15,216 +11,160 @@ L2TP VPN is a protocol that is used to establish a connection between a client a
 sudo apt update && sudo apt upgrade
 ```
 
-### INSTALL REQUIRED PACKAGES
-
-To install L2TP VPN server on Ubuntu we need to install the following packages. To do this open terminal and execute the following command:
+2. Download the script vpn.sh
 
 ```bash
-sudo apt-get install strongswan xl2tpd ppp lsof -y
+wget https://get.vpnsetup.net -O vpn.sh && sudo sh vpn.sh
 ```
 
-### CONFIGURE L2TP VPN SERVER
+3. Follow the instructions on the screen. user and password and ip address of the mikrotik device
 
-Once the installation is complete we need to configure the L2TP server. To do this open terminal and edit the file /etc/ipsec.conf
+
+IPsec VPN server is now ready for use!
+
+Connect to your new VPN with these details:
 
 ```bash
-sudo nano /etc/ipsec.conf
+Server IP: 18.17.185.89
+IPsec PSK: bDuW9nqPJoPPjXL9jzhH
+Username: vpnuser
+Password: KXqjY8BWetDYEbCZ
 ```
 
-Add the following configuration:
+Write these down. You'll need them to connect!
 
-```bash
-config setup
-    charon {
-        ikelifetime=60m
-        keylife=20m
-        rekeymargin=3m
-        keyingtries=1
-        authby=psk
-    }
+VPN client setup: https://vpnsetup.net/clients
 
-conn %default
-    keyexchange=ikev1
-    authby=psk
-    keyingtries=1
-    ikelifetime=60m
-    keylife=20m
-    rekeymargin=3m
-    reauth=no
-    dpdaction=clear
-    dpddelay=35s
-    dpdtimeout=150s
-    dpdrestart=120s
+================================================
 
-conn L2TP-IPsec
-    also=L2TP
-    left=%defaultroute
-    leftprotoport=17/1701
-    right=%any
-    rightprotoport=17/%any
-    auto=add
-```
+================================================
+
+IKEv2 setup successful. Details for IKEv2 mode:
+
+VPN server address: 18.17.185.89
+VPN client name: vpnclient
+
+Client configuration is available at:
+/root/vpnclient.p12 (for Windows & Linux)
+/root/vpnclient.sswan (for Android)
+/root/vpnclient.mobileconfig (for iOS & macOS)
+
+Next steps: Configure IKEv2 clients. See:
+https://vpnsetup.net/clients
 
 
-Set up the IPsec secrets:
+
+4. View or update the IPsec PSK
 
 
 ```bash
 sudo nano /etc/ipsec.secrets
 ```
 
-Add the following configuration:
+you will view the following
 
 ```bash
-: PSK "your_pre_shared_key"
+%any  %any  : PSK "bDuW9nsdqPJoPPjXL9jzhH"
 ```
 
-Replace `your_pre_shared_key` with your own pre-shared key.
-
-To get a random pre-shared key, you can use the following command:
-
-```bash
-openssl rand -base64 32
-```
-
-it will generate a random key that you can use as your pre-shared key just like this:
-
-```bash
-: PSK "X8b1Q6J6Q6J6Q6J6Q6J6Q6J6Q6Q6Q6J"
-```
-
-### CONFIGURE L2TP VPN SERVER
-
-Once the installation is complete we need to configure the L2TP server. To do this open terminal and edit the file /etc/xl2tpd/xl2tpd.conf
-
-```bash
-sudo nano /etc/xl2tpd/xl2tpd.conf
-```
-
-Add the following configuration:
-
-```bash
-[global]
-listen-addr = 0.0.0.0
-ipsec saref = yes
-
-[lns default]
-ip range = 192.168.1.100-192.168.1.200
-local ip = 192.168.1.1
-length bit = 24
-name = L2TP-Pool
-ppp debug = yes
-pppoptfile = /etc/ppp/options.xl2tpd
-require chap = yes
-refuse pap = yes
-require authentication = yes
-```
-
-### CONFIGURE PPP OPTIONS
-
-Next, we need to configure the PPP options. To do this open terminal and edit the file /etc/ppp/options.xl2tpd
-
-```bash
-sudo nano /etc/ppp/options.xl2tpd
-```
-
-Add the following configuration:
-
-```bash
-require-mschap-v2
-refuse-pap
-refuse-chap
-refuse-mschap
-name l2tpd
-password mypassword123
-ms-dns 8.8.8.8
-ms-dns 8.8.4.4
-```
-
-Replace `mypassword123` with your own password.
 
 
-### Set up PPP secrets:
-
-Next, we need to configure the PPP secrets. To do this open terminal and edit the file /etc/ppp/chap-secrets
+5. View or update the VPN user password
 
 ```bash
 sudo nano /etc/ppp/chap-secrets
 ```
 
-Add the following configuration:
+you will view the following
 
 ```bash
 # Secrets for authentication using CHAP
-# client    server    secret            IP addresses
-username    l2tpd    password123        *
+# client        server  secret                  IP addresses
+vpnuser         l2tpd   KXqjY8dBWetDYEbCZ        *
 ```
 
-Replace `username` with your own username and `password123` with your own password.
 
-or add with terminal command:\
+6. To assing a static IP address to the VPN user the ip range must be defined in the file /etc/ppp/options.xl2tpd ed ip range 10.10.0.1-10.10.3.254
+
+
+
+Add a user and password to the file  and assing a specific IP address
 
 ```bash
-echo "username l2tpd password123 *" | sudo tee -a /etc/ppp/chap-secrets
+sudo nano /etc/ppp/chap-secrets
 ```
 
-### Enable IP Forwarding
-
-To enable IP forwarding, open terminal and edit the file /etc/sysctl.conf
-
 ```bash
-sudo nano /etc/sysctl.conf
+# Secrets for authentication using CHAP
+# client        server  secret                  IP addresses
+vpnuser1         l2tpd   KXqjY8BWetDYEbCZ        10.10.0.10
+vpnuser2         l2tpd   AnotherPassword          10.10.0.11
 ```
 
-Uncomment the following line:
+
+
+ Restart the VPN service
+
+ 
 
 ```bash
-net.ipv4.ip_forward=1
+sudo service xl2tpd restart
 ```
 
-Apply the changes:
+
+8. Restart Services
+After making these changes, restart the IPsec and L2TP services to apply the new configuration:
 
 ```bash
-sudo sysctl -p
-```
-
-### Configure Firewall Rules
-
-To allow traffic to pass through the
-
-```bash
-sudo iptables -A INPUT -p udp --dport 500 -j ACCEPT
-sudo iptables -A INPUT -p udp --dport 4500 -j ACCEPT
-sudo iptables -A INPUT -p udp --dport 1701 -j ACCEPT
-sudo iptables -A INPUT -p esp -j ACCEPT
-sudo iptables -A INPUT -p ah -j ACCEPT
-sudo iptables -A INPUT -m policy --dir in --pol ipsec --proto esp -j ACCEPT
-sudo iptables -A INPUT -m policy --dir out --pol ipsec --proto esp -j ACCEPT
-sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-```
-
-### Restart Services
-
-To apply the changes, restart the services:
-
-```bash
-sudo systemctl restart strongswan
 sudo systemctl restart xl2tpd
-sudo systemctl enable strongswan
-sudo systemctl enable xl2tpd
+sudo systemctl restart ipsec
 ```
 
-### Check the Status
 
-To check the status of the services, run the following commands:
+To make the VPN server start automatically at boot, run the following command:
 
 ```bash
-sudo systemctl status strongswan
-sudo systemctl status xl2tpd
+sudo systemctl enable xl2tpd
+sudo systemctl enable ipsec
+```
+
+Forward TCP port 443 on the VPN server to the IPsec/L2TP client at 192.168.42.10.
+
+# Get default network interface name
+
+```bash
+netif=$(ip -4 route list 0/0 | grep -m 1 -Po '(?<=dev )(\S+)')
+iptables -I FORWARD 2 -i "$netif" -o ppp+ -p tcp --dport 443 -j ACCEPT
+iptables -t nat -A PREROUTING -i "$netif" -p tcp --dport 443 -j DNAT --to 192.168.42.10
+```
+
+HOW TO READ THE USER L2TP ACCOUT WITH PHP
+
+```php
+<?php
+$file = fopen("/etc/ppp/chap-secrets", "r") or exit("Unable to open file!");
+//Output a line of the file until the end is reached
+while(!feof($file))
+{
+echo fgets($file). "<br>";
+}
+fclose($file);
+?>
 ```
 
 
+Grant permissions to the file
 
+Reading the file /etc/ppp/chap-secrets with PHP requires the www-data user to have read permissions on the file. You can grant these permissions with the following command:
 
+```bash
+sudo chmod a+r /etc/ppp/chap-secrets
+```
+
+Write the PHP code in a file called read.php and access it from the browser to see the content of the file /etc/ppp/chap-secrets
+
+```bash
+sudo chmod a+w /etc/ppp/chap-secrets
+```
 
 

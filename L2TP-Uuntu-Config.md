@@ -67,6 +67,16 @@ you will view the following
 %any  %any  : PSK "bDuW9nsdqPJoPPjXL9jzhH"
 ```
 
+The PSK is the string between the quotes. You can change it to whatever you like. Just make sure it's a long, random string. Save the file and exit the editor. 
+
+%any Means that the PSK is used for all connections. If you want to use different PSKs for different clients, you can replace %any with the client's IP address. For example,
+
+
+
+```bash
+10.10.0.12 %any  : PSK "GDuW9nqPJoPPjXL9jzhHjuiDFuiHio"
+```
+
 
 
 5. View or update the VPN user password
@@ -101,11 +111,7 @@ vpnuser1         l2tpd   KXqjY8BWetDYEbCZ        10.10.0.10
 vpnuser2         l2tpd   AnotherPassword          10.10.0.11
 ```
 
-
-
  Restart the VPN service
-
- 
 
 ```bash
 sudo service xl2tpd restart
@@ -128,17 +134,7 @@ sudo systemctl enable xl2tpd
 sudo systemctl enable ipsec
 ```
 
-Forward TCP port 443 on the VPN server to the IPsec/L2TP client at 192.168.42.10.
-
-# Get default network interface name
-
-```bash
-netif=$(ip -4 route list 0/0 | grep -m 1 -Po '(?<=dev )(\S+)')
-iptables -I FORWARD 2 -i "$netif" -o ppp+ -p tcp --dport 443 -j ACCEPT
-iptables -t nat -A PREROUTING -i "$netif" -p tcp --dport 443 -j DNAT --to 192.168.42.10
-```
-
-HOW TO READ THE USER L2TP ACCOUT WITH PHP
+HOW TO READ THE USER PPTP ACCOUT WITH PHP
 
 ```php
 <?php

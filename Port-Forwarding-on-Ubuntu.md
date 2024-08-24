@@ -38,7 +38,11 @@ sudo sysctl -p
 
 ## Add the Port Forwarding Rule:
 
-Eg if you want to forward traffic from port 80 on your public IP address to port 80 on an internal device with IP address `81.
+Eg if you want to forward traffic from port 80 on your public IP address to port 80 on an internal device with IP address `81.67.230.1` 
+
+
+
+
 
 
 

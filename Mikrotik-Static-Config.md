@@ -17,56 +17,81 @@ a. Create a Bridge Interface for Static IF you don't have one IF you have one yo
 /interface bridge add name=UMS_Bridge_Static
 ```
 
-# Add a Static IP Address to the Bridge Interface:
+b. Assign the IP address to the bridge interface
 
 ```bash
-/ip address add address=41.18.1.1/24 interface=UMS_Bridge_Static
+/ip address add address=192.168.4.1/24 interface=StaticBridge
+```
+
+c. Create a DHCP pool that will define the range of IP addresses to be provided.
+
+```bash
+/ip pool add name=StaticPool ranges=192.168.4.10-192.168.4.100
+```
+d. Create a DHCP network entry that includes the gateway, DNS, and other options.
+
+```bash
+/ip dhcp-server network add address=192.168.4.0/24 gateway=192.168.4.1 dns-server=8.8.8.8
+```
+
+**Note:** Remember to edit the Netmask to 24 if you are using a different subnet.
+
+e. Set up the DHCP server on the interface connected to the AP..
+
+```bash
+/ip dhcp-server add name=CloudTikdhcp interface=StaticBridge address-pool=StaticPool disabled=no
+```
+
+f. add a client ad assign to A SPECIFIC Speed
+
+ (i) Client 1
+   
+```bash
+/queue simple add name=Client1 target=192.168.4.10/32 max-limit=5M/5M
+```
+
+ (ii) Client 2
+
+```bash
+/queue simple add name=Client2 target=192.168.4.11/32 max-limit=5M/5M
 ```
 
 
-# # Configure NAT
-  
-  ```bash
-/ip firewall nat add chain=srcnat out-interface=UMS_Bridge_Static action=masquerade
+g. If you want to assign a static IP address to a specific client, you can do so by creating a DHCP leasec add link it to the MAC address of the client.
+
+  (i) Client 1
+
+```bash
+/ip dhcp-server lease add address=192.168.4.10 mac-address=XX:XX:XX:XX:XX:XX comment="Client1"
+```
+
+  (ii) Client 2
+
+```bash
+/ip dhcp-server lease add address=192.168.4.11 mac-address=YY:YY:YY:YY:YY:YY comment="Client2"
 ```
 
 
+## hOW TO CONNECT THE AP(ACCESS POINT) WITH INTERNET USING STATIC ROUTER
 
-# Create simple queue for 10 Mbps user
-
-```bash
-/queue simple add name=10mbps_user target=41.18.1.10/32 max-limit=10M/10M
-```
-
-
-# Create simple queue for 4 Mbps user
+For client 1 usert the following configuration
 
 ```bash
-/queue simple add name=4mbps_user target=41.18.1.11/32 max-limit=4M/4M
-```
-
-
-## Assing bridge to the ports
-
-```bash
-/interface bridge port add bridge=UMS_Bridge_Static interface=ether2
-```
-
-You can assign the bridge to the ports you want to use for the static router.
-
-### Step 2: Add One Computer to the Network
-
-Connect a computer to the Mikrotik router using an Ethernet cable.
-
-Configure the computer's network settings to use the following IP address:
-
-
-```bash
-IP Address: 41.18.1.2
+IP Address: 192.168.4.10
 Subnet Mask: 255.255.255.0
-Gateway: 41.18.1.1
-DNS Server: You can use a public DNS server like 8.8.8.8 (Google DNS) or any DNS server of your choice.
+Gateway: 192.168.4.1
+DNS: 8.8.8.8
 ```
+
+#Conclusion
+
+
+This tutorial has shown you how to configure a Mikrotik router to work as a static router. By following these steps, you can set up a static router that forwards data packets between computer networks. This will help you to create a stable and reliable network that can handle a large amount of traffic. If you have any questions or need further assistance, please feel free to ask in the comments section below.
+
+
+
+
+
 
 
 

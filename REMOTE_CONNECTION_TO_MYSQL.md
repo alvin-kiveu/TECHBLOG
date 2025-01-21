@@ -52,7 +52,7 @@ sudo service mysql restart
 ## MySQL Create User
 
 ```sql
-CREATE USER 'RemoteNetgauird'@'%' IDENTIFIED BY 'StrongPassword123!';
+CREATE USER 'RemoteUser'@'%' IDENTIFIED BY 'StrongPassword123!';
 
 ```
 

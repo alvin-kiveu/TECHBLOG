@@ -180,12 +180,17 @@ sudo apt install software-properties-common -y
 ```
 
 ```bash
-sudo add-apt-repository ppa:ondrej/php
+sudo add-apt-repository ppa:ondrej/php -y
 ```
 
 ```bash
-sudo apt install php8.2-fpm php8.2 libapache2-mod-php8.2 php8.2-common php8.2-mysql php8.2-xml php8.2-xmlrpc php8.2-curl php8.2-gd php8.2-imagick php8.2-cli php8.2-imap php8.2-mbstring php8.2-opcache php8.2-soap php8.2-zip php8.2-intl php8.2-bcmath unzip -y
+sudo apt install php8.2-fpm php8.2 php8.2-common php8.2-mysql php8.2-xml php8.2-xmlrpc php8.2-curl php8.2-gd php8.2-imagick php8.2-cli php8.2-imap php8.2-mbstring php8.2-opcache php8.2-soap php8.2-zip php8.2-intl php8.2-bcmath unzip -y
 ```
+
+```bash
+systemctl status php8.2-fpm
+```
+
 
 Check the version of PHP
 
@@ -196,17 +201,17 @@ php -v
 Configure PHP
 
 ```bash
-sudo nano /etc/php/8.2/apache2/php.ini
+sudo nano /etc/php/8.2/fpm/php.ini
 ```
 
 Change the following lines
 
 ```bash
-upload_max_filesize = 32M 
-post_max_size = 48M 
-memory_limit = 256M 
-max_execution_time = 600 
-max_input_vars = 3000 
+upload_max_filesize = 32M
+post_max_size = 48M
+memory_limit = 256M
+max_execution_time = 600
+max_input_vars = 3000
 max_input_time = 1000
 ```
 
@@ -215,13 +220,21 @@ Save and exit
 or
 
 ```bash
-sudo sed -i 's/^upload_max_filesize.*/upload_max_filesize = 32M/; s/^post_max_size.*/post_max_size = 48M/; s/^memory_limit.*/memory_limit = 256M/; s/^max_execution_time.*/max_execution_time = 600/; s/^max_input_vars.*/max_input_vars = 3000/; s/^max_input_time.*/max_input_time = 1000/' /etc/php/8.2/apache2/php.ini
+sudo sed -i 's/^upload_max_filesize.*/upload_max_filesize = 32M/; s/^post_max_size.*/post_max_size = 48M/; s/^memory_limit.*/memory_limit = 256M/; s/^max_execution_time.*/max_execution_time = 600/; s/^max_input_vars.*/max_input_vars = 3000/; s/^max_input_time.*/max_input_time = 1000/' /etc/php/8.2/fpm/php.ini
 ```
 
 
 Restart Nginx
 
 ```bash
+sudo systemctl restart nginx
+```
+
+
+```bash
+sudo nginx -t
+sudo systemctl restart nginx
+sudo systemctl restart php8.2-fpm
 sudo systemctl restart nginx
 ```
 

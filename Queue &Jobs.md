@@ -235,7 +235,7 @@ Installation:
 
 ```bash
 composer require romanzipp/laravel-queue-monitor
-php artisan queue-monitor:install
+php artisan vendor:publish --provider="romanzipp\QueueMonitor\Providers\QueueMonitorProvider" --tag=config --tag=migrations
 php artisan migrate
 ```
 

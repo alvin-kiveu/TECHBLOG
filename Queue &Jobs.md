@@ -218,3 +218,36 @@ Start/Restart the Worker: If it's already running, restart the worker with:
 ```bash
 sudo supervisorctl restart laravel-worker:*
 ```
+
+
+Laravel Queue Monitor (by romanzipp)
+What it does: Tracks your queued jobs (any queue driver) in a database table and optionally provides a simple UI.
+
+Features:
+
+Job start/finish/duration status
+
+Saves output and exception stack trace
+
+Works with all drivers
+
+Installation:
+
+```bash
+composer require romanzipp/laravel-queue-monitor
+php artisan queue-monitor:install
+php artisan migrate
+```
+
+
+In your Job class:
+
+```php
+use romanzipp\QueueMonitor\Traits\IsMonitored;
+
+class MyJob implements ShouldQueue
+{
+    use IsMonitored;
+}
+
+```

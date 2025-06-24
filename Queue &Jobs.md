@@ -241,6 +241,42 @@ php artisan vendor:publish --provider="romanzipp\QueueMonitor\Providers\QueueMon
 ```
 
 
+You can enable the web UI by setting the ui.enabled to true configuration value queue-monitor queue-monitor.php. 
+
+```php
+'ui' => [
+        // Enable the UI
+        'enabled' => true,
+'''''
+```
+
+### Register the Routes
+
+In your routes/web.php, add:
+
+```php
+use romanzipp\QueueMonitor\Controllers\ShowQueueMonitorController;
+
+Route::get('/queue-monitor', ShowQueueMonitorController::class)->name('queue-monitor');
+```
+
+You can protect this route with middleware, for example:
+
+```php
+Route::middleware(['auth'])->group(function () {
+    Route::get('/queue-monitor', ShowQueueMonitorController::class)->name('queue-monitor');
+});
+```
+
+Visit the UI in your browser
+Open:
+
+
+```arduino
+http://yourdomain.com/queue-monitor
+```
+
+
 In your Job class:
 
 ```php

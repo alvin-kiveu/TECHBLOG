@@ -1,93 +1,103 @@
-To install and access UISP (formerly UNMS) for the first time, follow these steps based on the official guide:
+UISP (formerly UNMS) – First-Time Installation and Access Guide
 
-Prerequisites
+===============================================================
+1. PREREQUISITES
+===============================================================
+
 Server Requirements:
+- OS: Ubuntu 18.04 / 20.04 / 22.04 (recommended) or Debian 10 / 11
+- Resources: Minimum 2 CPU cores, 4GB RAM, 10GB disk space
+- Static IP address for the server
+- Ports 80 (HTTP), 443 (HTTPS), and 10001 (device communication) open in the firewall
 
-OS: Ubuntu 18.04/20.04/22.04 (recommended) or Debian 10/11.
+===============================================================
+2. INSTALLATION STEPS
+===============================================================
 
-Resources: Minimum 2 CPU cores, 4GB RAM, 10GB disk space.
+2.1 Prepare the System
 
-Static IP address for the server.
-
-Ports 80 (HTTP), 443 (HTTPS), and 10001 (device communication) open in the firewall.
-
-Installation Steps
-1. Prepare the System
 Update packages:
+    sudo apt update && sudo apt upgrade -y
 
-bash
-sudo apt update && sudo apt upgrade -y
 Install dependencies:
+    sudo apt install -y curl
 
-bash
-sudo apt install -y curl
-2. Run the Installation Script
+2.2 Run the Installation Script
+
 Download and execute the UISP installer:
+    curl -fsSL https://uisp.ui.com/v1/install > install.sh
+    sudo bash install.sh
 
-bash
-curl -fsSL https://uisp.ui.com/v1/install > install.sh
-sudo bash install.sh
-Follow prompts to:
+Follow the prompts to:
+- Accept the license agreement.
+- Configure network settings (use default settings if unsure).
+- Set a hostname (e.g., uisp.yourdomain.com).
 
-Accept the license agreement.
+2.3 Configure Firewall
 
-Configure network settings (use default settings if unsure).
-
-Set a hostname (e.g., uisp.yourdomain.com).
-
-3. Configure Firewall
 Allow essential ports:
+    sudo ufw allow 80/tcp     # HTTP
+    sudo ufw allow 443/tcp    # HTTPS
+    sudo ufw allow 10001/udp  # Device discovery
+    sudo ufw enable
 
-bash
-sudo ufw allow 80/tcp    # HTTP
-sudo ufw allow 443/tcp   # HTTPS
-sudo ufw allow 10001/udp # Device discovery
-sudo ufw enable
-Accessing UISP
-Open the Web Interface:
+===============================================================
+3. ACCESSING UISP
+===============================================================
+
+3.1 Open the Web Interface
 
 In a browser, navigate to:
+    https://<SERVER_IP>
 
-https://<SERVER_IP> (replace with your server’s IP/hostname).
+Replace <SERVER_IP> with your server's IP address or hostname.
 
-Ignore SSL warnings during initial setup (self-signed certificate).
+Note: Ignore SSL warnings during initial setup (self-signed certificate).
 
-First-Time Setup Wizard:
+3.2 First-Time Setup Wizard
 
-Create an admin account (email/password).
+- Create an admin account (email/password).
+- Configure basic settings (organization name, time zone).
+- Add a Site (e.g., "Main Office") to organize devices.
 
-Configure basic settings (organization name, time zone).
-
-Add a Site (e.g., "Main Office") to organize devices.
-
-Connect Devices:
+3.3 Connect Devices
 
 For Ubiquiti devices (UniFi, EdgeMax, etc.):
+- Ensure devices are on the same network as UISP.
+- Go to Devices > Discover. UISP will auto-detect supported devices.
+- Click Adopt to add devices to UISP.
 
-Ensure devices are on the same network as UISP.
+===============================================================
+4. POST-INSTALLATION
+===============================================================
 
-Go to Devices > Discover. UISP will auto-detect supported devices.
+Backup:
+- Enable automatic backups via Settings > Backup.
 
-Click Adopt to add devices to UISP.
+Updates:
+- UISP auto-updates by default (manage in Settings > Updates).
 
-Post-Installation
-Backup: Enable automatic backups via Settings > Backup.
+Remote Access:
+- Use UISP Connect for secure remote access.
 
-Updates: UISP auto-updates by default (manage in Settings > Updates).
+===============================================================
+5. TROUBLESHOOTING
+===============================================================
 
-Remote Access: Use UISP Connect for secure remote access.
+Installation Fails?
+- Verify OS compatibility and dependencies.
+- Check logs:
+    journalctl -u docker
 
-Troubleshooting
-Installation Fails?:
+  Note: UISP runs in Docker containers.
 
-Verify OS compatibility and dependencies.
+Devices Not Found?
+- Confirm port 10001/udp is open.
+- Ensure devices and UISP are on the same Layer-2 network.
 
-Check logs: journalctl -u docker (UISP runs in Docker containers).
-
-Devices Not Found?:
-
-Confirm port 10001/udp is open.
-
-Ensure devices and UISP are on the same Layer-2 network.
+===============================================================
+6. FULL GUIDE
+===============================================================
 
 For details, see the full guide:
+[Add full guide URL here]
